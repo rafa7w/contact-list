@@ -38,6 +38,12 @@ class ContactHelper {
           'CREATE TABLE $contactTable($idColumn INTEGER PRIMARY KEY, $nameColumn TEXT, $emailColumn TEXT, $phoneColumn TEXT, $imgColumn TEXT)');
     });
   }
+
+  Future<Contact> saveContact(Contact contact) async {
+    Database? dbContact = await db;
+    contact.id = await dbContact!.insert(contactTable, contact.toMap());
+    return contact;
+  }
 }
 
 class Contact {
@@ -55,7 +61,7 @@ class Contact {
     img = map[imgColumn];
   }
 
-  Map toMap() {
+  Map<String, dynamic> toMap() {
     Map<String, dynamic> map = {
       nameColumn: name,
       emailColumn: email,
