@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:contact_list/helpers/contact_help.dart';
 import 'package:flutter/material.dart';
 
@@ -12,12 +13,58 @@ class _HomePageState extends State<HomePage> {
   ContactHelper helper = ContactHelper();
   List<Contact> contacts = [];
 
+  Widget _contactCard(BuildContext context, int index) {
+    return GestureDetector(
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Row(
+            children: [
+              Container(
+                height: 80.0,
+                width: 80.0,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                      image: contacts[index].img != null
+                          ? FileImage(File(contacts[index].img))
+                          : AssetImage('images/user.png')),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 10.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      contacts[index].name ?? '',
+                      style: const TextStyle(
+                          fontSize: 22.0, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      contacts[index].email ?? '',
+                      style: const TextStyle(fontSize: 18.0),
+                    ),
+                    Text(
+                      contacts[index].phone ?? '',
+                      style: const TextStyle(fontSize: 18.0),
+                    )
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   @override
   void initState() {
     super.initState();
     helper.getAllContacts().then((list) {
       setState(() {
-        contacts = list;  
+        contacts = list;
       });
     });
   }
@@ -40,7 +87,7 @@ class _HomePageState extends State<HomePage> {
           padding: const EdgeInsets.all(10.0),
           itemCount: contacts.length,
           itemBuilder: (context, index) {
-            
+            return _contactCard(context, index);
           }),
     );
   }
