@@ -78,8 +78,9 @@ class _HomePageState extends State<HomePage> {
                   shape: BoxShape.circle,
                   image: DecorationImage(
                     image: contacts[index].img != null
-                        ? FileImage(File(contacts[index].img))
-                        : const AssetImage('images/user.png'),
+                        ? FileImage(File(contacts[index].img!))
+                        : const AssetImage('images/user.png') as ImageProvider,
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),
@@ -165,7 +166,7 @@ class _HomePageState extends State<HomePage> {
                       // ignore: deprecated_member_use
                       child: FlatButton(
                         onPressed: () {
-                          helper.deleteContact(contacts[index].id);
+                          helper.deleteContact(contacts[index].id ?? 0);
                           setState(() {
                             contacts.removeAt(index);
                             Navigator.pop(context);

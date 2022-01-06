@@ -70,13 +70,16 @@ class _ContactPageState extends State<ContactPage> {
                     shape: BoxShape.circle,
                     image: DecorationImage(
                       image: _editedContact!.img != null
-                          ? FileImage(File(_editedContact!.img))
-                          : const AssetImage('images/user.png'),
+                          ? FileImage(File(_editedContact!.img!))
+                          : const AssetImage('images/user.png')
+                              as ImageProvider,
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),
                 onTap: () {
-                  ImagePicker.pickImage(source: ImageSource.camera)
+                  ImagePicker()
+                      .pickImage(source: ImageSource.camera)
                       .then((file) {
                     if (file == null) return;
                     setState(() {
