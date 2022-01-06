@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:contact_list/helpers/contact_help.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
+import 'package:image_picker/image_picker.dart';
 
 // ignore: must_be_immutable
 class ContactPage extends StatefulWidget {
@@ -74,6 +75,15 @@ class _ContactPageState extends State<ContactPage> {
                     ),
                   ),
                 ),
+                onTap: () {
+                  ImagePicker.pickImage(source: ImageSource.camera)
+                      .then((file) {
+                    if (file == null) return;
+                    setState(() {
+                      _editedContact!.img = file.path;
+                    });
+                  });
+                },
               ),
               TextField(
                 focusNode: _nameFocus,
@@ -149,4 +159,3 @@ class _ContactPageState extends State<ContactPage> {
     }
   }
 }
- 
