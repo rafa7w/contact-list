@@ -56,3 +56,4 @@ analysis_options.yaml
 .metadata
 .flutter-plugins
 .flutter-plugins-dependencies
+/lib/interface/generated_plugin_registrant

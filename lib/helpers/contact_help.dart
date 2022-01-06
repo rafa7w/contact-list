@@ -92,7 +92,7 @@ class ContactHelper {
     Database? dbContact = await db;
     await dbContact!.close();
   }
-} 
+}
 
 class Contact {
   int? id;
@@ -116,7 +116,7 @@ class Contact {
       nameColumn: name,
       emailColumn: email,
       phoneColumn: phone,
-      imgColumn: img,
+      imgColumn: img
     };
 
     if (id != null) {
