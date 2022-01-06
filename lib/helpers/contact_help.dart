@@ -92,7 +92,7 @@ class ContactHelper {
     Database? dbContact = await db;
     await dbContact!.close();
   }
-}
+} 
 
 class Contact {
   int? id;
@@ -100,6 +100,8 @@ class Contact {
   String? email;
   String? phone;
   String? img;
+
+  Contact();
 
   Contact.fromMap(Map map) {
     id = map[idColumn];
